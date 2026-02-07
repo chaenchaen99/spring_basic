@@ -4,13 +4,17 @@ import com.hello.core.discount.DiscountPolicy;
 import com.hello.core.member.Member;
 import com.hello.core.member.MemberRepository;
 import com.hello.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService {
 
   //중요**) DIP지키기 : 인터페이스에만 의존한다, 구체적인 클래스는 전혀 모른다!!
   private MemberRepository memberRepository;
   private DiscountPolicy discountPolicy;
 
+  @Autowired
   public OrderServiceImpl(MemberRepository memberRepository,DiscountPolicy discountPolicy) {
     this.discountPolicy = discountPolicy;
     this.memberRepository = memberRepository;
@@ -22,5 +26,10 @@ public class OrderServiceImpl implements OrderService {
     int disCountPrice = discountPolicy.discount(member, itemPrice);
 
     return new Order(memberId, itemName, itemPrice, disCountPrice);
+  }
+
+  /// 테스트 용도
+  public MemberRepository getMemberRepository() {
+    return memberRepository;
   }
 }

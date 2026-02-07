@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 //스프링은 @Configuration이 붙은 AppConfig를 설정 구성 정보로 사용
+//@Configuration 을 통해 bean의 Singleton을 보장
 @Configuration
 public class AppConfig {
 
